@@ -1,4 +1,11 @@
 const express = require('express');
+require('express-async-errors');
+
+// código Willianson
+
+const user = require('./routes/user');
+
+// código Willianson
 
 // ...
 
@@ -6,9 +13,15 @@ const app = express();
 
 app.use(express.json());
 
-app.use((err, req, res, _next) => {
-  res.status(err.status || 500).json({ message: err.message });
-});
+// código Willianson
+
+app.use('/login', user);
+
+// app.use((err, req, res, _next) => {
+//   res.status(err.status || 500).json({ message: err.message });
+// });
+
+// código Willianson
 
 // ...
 
