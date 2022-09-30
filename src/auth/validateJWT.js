@@ -1,29 +1,43 @@
-require('dotenv/config');
+// require('dotenv/config');
 
 const jwt = require('jsonwebtoken');
 
-const userService = require('../services/userService');
+// const userService = require('../services/userService');
 
 const secret = process.env.JWT_SECRET || 'seusecretdetoken';
 
-const validateJWT = async (req, res, next) => {
-  const token = req.header('Authorization');
+// const jwtconfig = {
+//   expiresIn: '7d',
+//   algorithm: 'HS256',
+// };
+
+const validateJWT = async (token) => {
   if (!token) {
-    return res.status(401).json({ message: 'Token não encontrado' });
+    const e = new Error('Token not found');
+    e.status = 401;
+    throw e;
   }
   try {
-    const decoded = jwt.verify(token, secret);
-    const user = await userService.getByUserId(decoded.data.userId);
-    if (!user) {
-      return res.status(401).json({ message: 'User não encontrado' });
-    }
-    req.user = user;
-    next();
-  } catch (err) {
-    return res.status(500).json({ message: 'Intern Erro', error: err.message });
+    const instrospection = await jwt.verify(token, secret);
+    return instrospection;
+  } catch (e) {
+    const err = new Error('Expired or invalid token');
+    err.status = 401;
+    throw err;
   }
 };
 
 module.exports = {
   validateJWT,
 };
+
+// const decoded = await jwt.verify(token, secret);
+// if (decoded.err) {
+//   return res.status(401).json({ message: 'Expired or invalid token' });
+// }
+// const userDecoded = await userService.getByUserId(decoded.data.userId);
+// if (!userDecoded) {
+//   return res.status(404).json({ message: 'User does not exist' });
+// }
+// req.user = userDecoded;
+// next();

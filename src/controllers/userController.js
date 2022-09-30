@@ -43,7 +43,17 @@ const userPostController = async (req, res) => {
   }
 };
 
+const userGetAllController = async (req, res) => {
+  // try {
+    const usersAll = await userService.getUsers();
+    return res.status(200).json(usersAll);
+  // } catch (err) {
+  //   return res.status(500).json({ message: 'Intern Erro', error: err.message });
+  // }
+};
+
 module.exports = {
     authenticationController,
     userPostController,
+    userGetAllController,
 };
