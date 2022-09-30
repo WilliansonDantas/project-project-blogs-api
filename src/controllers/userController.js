@@ -29,16 +29,21 @@ const authenticationController = async (req, res) => {
   }
 };
 
-// const authenticationLoginService = require('../services/userService');
-
-// const authenticationController = async (req, res) => {
-//     // const { email, password } = req.body;
-//     // console.log('email', email);
-//     // console.log('senha', password);
-//     const token = await authenticationLoginService.authenticationService(req.body);
-//     return res.status(200).json(token);
-// };
+const userPostController = async (req, res) => {
+  try {
+    const itemCreated = await userService.createUser(req.body);
+    const jwtconfig = {
+      expiresIn: '7d',
+      algorithm: 'HS256',
+    };
+    const tokenCreated = jwt.sign({ data: { userId: itemCreated.id } }, secret, jwtconfig);
+    return res.status(201).json({ token: tokenCreated });
+  } catch (err) {
+    return res.status(500).json({ message: 'Intern Erro', error: err.message });
+  }
+};
 
 module.exports = {
     authenticationController,
+    userPostController,
 };

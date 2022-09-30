@@ -15,11 +15,11 @@ app.use(express.json());
 
 // código Willianson
 
-app.use('/login', user);
+app.use(user);
 
-// app.use((err, req, res, _next) => {
-//   res.status(err.status || 500).json({ message: err.message });
-// });
+app.use((err, req, res, _next) => {
+  res.status(err.status || 500).json({ message: err.message });
+});
 
 // código Willianson
 

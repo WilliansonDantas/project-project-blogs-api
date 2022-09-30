@@ -1,10 +1,13 @@
 const express = require('express');
-const authenticationControllerLogin = require('../controllers/userController');
-// const validadedEmail = require('../middlewares/validadedEmail');
-// const validadedPassword = require('../middlewares/validadedPassword');
+const UserController = require('../controllers/userController');
+// const { validateJWT } = require('../auth/validateJWT');
+const { blogMiddleware } = require('../middlewares/blogMiddleware');
+const { validationEmail } = require('../middlewares/validationEmail');
 
 const router = express.Router();
 
-router.post('/', authenticationControllerLogin.authenticationController);
+router.post('/login', UserController.authenticationController);
+router.post('/user', blogMiddleware, validationEmail, 
+UserController.userPostController);
 
 module.exports = router;
