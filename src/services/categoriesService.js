@@ -1,9 +1,8 @@
 const { Category } = require('../models');
 
-const createCategorie = ({ name }) => Category
-.create({ name });
+const createCategorie = ({ name }) => Category.create({ name });
 
-// const getUsers = () => User.findAll({ attributes: { exclude: ['password'] } });
+const getCategories = () => Category.findAll();
 
 // const getByEmail = (email) => User.findOne(email);
 
@@ -13,6 +12,7 @@ const createCategorie = ({ name }) => Category
 
 module.exports = {
   createCategorie,
+  getCategories,
 };
 
 // Referência 01: Vídeo Danilo JWT
