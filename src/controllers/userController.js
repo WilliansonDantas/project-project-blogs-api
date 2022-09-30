@@ -44,16 +44,31 @@ const userPostController = async (req, res) => {
 };
 
 const userGetAllController = async (req, res) => {
-  // try {
+  try {
     const usersAll = await userService.getUsers();
     return res.status(200).json(usersAll);
-  // } catch (err) {
-  //   return res.status(500).json({ message: 'Intern Erro', error: err.message });
-  // }
+  } catch (err) {
+    return res.status(500).json({ message: 'Intern Erro', error: err.message });
+  }
+};
+
+const userGetIdController = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const userId = await userService.getByUserId(id);
+    console.log(userId);
+    if (!userId) {
+    return res.status(404).json({ message: 'User does not exist' });
+    }
+    return res.status(200).json(userId);
+  } catch (err) {
+    return res.status(500).json({ message: 'Intern Erro', error: err.message });
+  }
 };
 
 module.exports = {
     authenticationController,
     userPostController,
     userGetAllController,
+    userGetIdController,
 };
