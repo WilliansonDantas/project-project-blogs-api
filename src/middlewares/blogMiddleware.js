@@ -1,7 +1,7 @@
-const schemas = require('./schemas');
+const validationUserSchema = require('./validationUserSchema');
 
 const blogMiddleware = (req, res, next) => {
-  const validationRequired = schemas.validationSchema.validate(req.body);
+  const validationRequired = validationUserSchema.validationUserSchema.validate(req.body);
   if (validationRequired.error) {
     return res
       .status(400)

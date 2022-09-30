@@ -4,6 +4,7 @@ require('express-async-errors');
 // código Willianson
 
 const user = require('./routes/user');
+const categories = require('./routes/categories');
 
 // código Willianson
 
@@ -16,6 +17,7 @@ app.use(express.json());
 // código Willianson
 
 app.use(user);
+app.use(categories);
 
 app.use((err, req, res, _next) => {
   res.status(err.status || 500).json({ message: err.message });
