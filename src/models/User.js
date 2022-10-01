@@ -34,7 +34,6 @@ const UserModel = (sequelize, DataTypes) => {
     foreignKey: 'userId',
   });
 }
-
   return UserSchema;
 };
 

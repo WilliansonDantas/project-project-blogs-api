@@ -7,4 +7,6 @@ const router = express.Router();
 
 router.get('/post', jwtMiddleware, PostController.getAllController);
 
+router.get('/post/:id', jwtMiddleware, PostController.getIdController);
+
 module.exports = router;

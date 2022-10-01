@@ -38,7 +38,6 @@ const BlogPostModel = (sequelize, DataTypes) => {
           foreignKey: 'userId',
       });
     }
-  
     return BlogPostSchema;
   };
   

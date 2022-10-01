@@ -16,7 +16,6 @@ const CategoryModel = (sequelize, DataTypes) => {
       underscored: true, 
       tableName: 'categories'
     });
-  
     return CategorySchema;
   };
   

@@ -24,7 +24,6 @@ const PostCategoryModel = (sequelize, DataTypes) => {
           otherKey: 'categoryId'
       });
   }
-
   return PostCategorySchema;
 };
 

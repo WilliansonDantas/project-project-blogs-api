@@ -7,6 +7,7 @@ const router = express.Router();
 
 router.post('/categories', jwtMiddleware, categoriesMiddleware, 
 CategoriesController.categoriesPostController);
+
 router.get('/categories', jwtMiddleware, CategoriesController.categoriesGetAllController);
 
 module.exports = router;
